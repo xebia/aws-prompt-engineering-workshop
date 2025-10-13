@@ -1,0 +1,63 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Parent SAM template deploying environment.yml as a nested stack
+
+Resources:
+
+  WorkshopNotebookControlPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: WorkshopNotebookControlPolicy
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Resource:
+              - !Sub arn:aws:bedrock:*:${AWS::AccountId}:inference-profile/eu.amazon.nova-lite-v1:0
+              - arn:aws:bedrock:*::foundation-model/amazon.nova-lite-v1:0
+            Action:
+              - bedrock:InvokeModel
+
+
+  NotebookLifecycleConfig:
+    Type: AWS::SageMaker::NotebookInstanceLifecycleConfig
+    Properties:
+      NotebookInstanceLifecycleConfigName: WorkshopConfig
+      OnStart:
+        - Content: !Base64 |
+            #!/bin/bash
+  
+            set -ex
+            
+            IDLE_TIME=600
+
+            # Clone repo
+            cd /home/ec2-user/SageMaker
+            rm -rf aws-prompt-engineering-workshop/
+            git clone https://github.com/xebia/aws-prompt-engineering-workshop
+            
+            PYTHON_DIR=$(source /home/ec2-user/anaconda3/bin/activate /home/ec2-user/anaconda3/envs/JupyterSystemEnv && which python)
+
+            # Auto Stop
+            echo "Fetching the autostop script"
+            wget https://raw.githubusercontent.com/aws-samples/amazon-sagemaker-notebook-instance-lifecycle-config-samples/master/scripts/auto-stop-idle/autostop.py            
+            (crontab -l 2>/dev/null; echo "*/5 * * * * $PYTHON_DIR $PWD/autostop.py --time $IDLE_TIME --ignore-connections >> /var/log/jupyter.log") | crontab -
+            crontab -l
+
+  Environment1:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop1
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment2:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop2
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
