@@ -51,10 +51,9 @@ Resources:
                 NOTEBOOK_ARN=$(jq '.ResourceArn' /opt/ml/metadata/resource-metadata.json --raw-output)
                 USERNAME=$(aws sagemaker list-tags --resource-arn $NOTEBOOK_ARN  | jq -r --arg ENV_VARIABLE_NAME "Username" .'Tags[] | select(.Key == $ENV_VARIABLE_NAME).Value' --raw-output)
 
-                rm /etc/profile.d/jupyter-env.sh | true
                 echo "export USERNAME=$USERNAME" > /etc/profile.d/jupyter-env.sh
                 cat /etc/profile.d/jupyter-env.sh
-
+                systemctl --no-block restart jupyter-server.service
 
   Environment1:
     Type: AWS::Serverless::Application
