@@ -25,7 +25,6 @@ Resources:
             Action:
               - bedrock:InvokeModel
 
-
   NotebookLifecycleConfig:
     Type: AWS::SageMaker::NotebookInstanceLifecycleConfig
     Properties:
