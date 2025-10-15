@@ -70,6 +70,13 @@ Resources:
             Resource: '*'
             Action:
               - sagemaker:ListNotebookInstances
+          - Effect: Allow
+            Action:
+              - ssm:GetParameter
+              - ssm:GetParameters
+              - ssm:GetParameterHistory
+              - ssm:GetParametersByPath
+            Resource: !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Username}/*'
 
   WorkshopNotebookRole:
     Type: AWS::IAM::Role
@@ -94,3 +101,34 @@ Resources:
       RoleArn: !GetAtt WorkshopNotebookRole.Arn
       LifecycleConfigName: !Ref NotebookLifecycleConfig
       DefaultCodeRepository: https://github.com/xebia/aws-prompt-engineering-workshop
+      Tags:
+        - Key: Username
+          Value: !Ref Username
+
+  BedrockPrompt:
+    Type: AWS::Bedrock::Prompt
+    Properties:
+      Name: !Sub "${Username}-prompt"
+      Description: !Sub "Prompt used for the workshop user: ${Username}"
+      DefaultVariant: "production"
+      Variants:
+        - Name: "production"
+          TemplateType: "TEXT"
+          TemplateConfiguration:
+            Text:
+              Text: "Hello {{customer_name}}, welcome to our support. How can I help you with {{issue_type}} today?"
+              InputVariables:
+                - Name: "customer_name"
+                - Name: "issue_type"
+          ModelId: "eu.amazon.nova-lite-v1:0"
+          InferenceConfiguration:
+            Text:
+              MaxTokens: 200
+              Temperature: 0.7
+
+  ManagedPromptSSMParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: !Sub "/${Username}/managed-prompt"
+      Type: String
+      Value: !GetAtt BedrockPrompt.Arn
