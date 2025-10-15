@@ -1,0 +1,53 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-ast
+      - id: check-xml
+      - id: check-builtin-literals
+      - id: check-yaml
+        args: ['--allow-multiple-documents', '--unsafe']
+      - id: check-symlinks
+      - id: check-json
+      - id: check-docstring-first
+      - id: debug-statements
+      - id: detect-private-key
+      - id: detect-aws-credentials
+        args: [--allow-missing-credentials]
+        exclude: package-lock\.json$
+      - id: check-executables-have-shebangs
+      - id: check-added-large-files
+        args: ['--maxkb=5000']
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+        args:
+          - '--fix=lf'
+      - id: name-tests-test
+      - id: pretty-format-json
+        args:
+          - '--autofix'
+          - '--indent=2'
+          - '--no-sort-keys'
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.18.1
+    hooks:
+      - id: markdownlint-cli2
+  - repo: https://github.com/ambv/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.10
+    hooks:
+      # Run the linter.
+      - id: ruff-check
+        types_or: [ python, pyi ]
+        args: [ --fix ]
+  - repo: https://github.com/aws-cloudformation/cfn-lint
+    rev: v1.40.0
+    hooks:
+      - id: cfn-lint
+        files: \.(yml|yaml)$
+        exclude: ^(\.github/|\.pre-commit-config\.yaml$|backend/openapi\.yml$|wiki/.markdownlint.yaml$)
