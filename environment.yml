@@ -16,30 +16,60 @@ Parameters:
 
 Resources:
 
+  WorkshopUserPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: !Sub '${Username}-notebook-control-policy'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Resource: !Sub arn:aws:sagemaker:${AWS::Region}:${AWS::AccountId}:notebook-instance/${Username}-notebook
+            Action:
+              - sagemaker:CreatePresignedNotebookInstanceUrl
+              - sagemaker:DescribeNotebookInstance
+              - sagemaker:StartNotebookInstance
+              - sagemaker:StopNotebookInstance
+              - sagemaker:ListTags
+          - Effect: Allow
+            Resource: '*'
+            Action:
+              - sagemaker:ListNotebookInstances
+              - sagemaker:ListCodeRepositories
+              - sagemaker:ListNotebookInstanceLifecycleConfigs
+              - sagemaker:DescribeNotebookInstanceLifecycleConfig
+
   WorkshopUser:
     Type: AWS::IAM::User
     Properties:
       UserName: !Ref Username
-      Policies:
-        - PolicyName: NotebookControlOnly
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Resource: !Sub arn:aws:sagemaker:${AWS::Region}:${AWS::AccountId}:notebook-instance/${Username}-notebook
-                Action:
-                  - sagemaker:CreatePresignedNotebookInstanceUrl
-                  - sagemaker:DescribeNotebookInstance
-                  - sagemaker:StartNotebookInstance
-                  - sagemaker:StopNotebookInstance
-                  - sagemaker:ListTags
-              - Effect: Allow
-                Resource: '*'
-                Action:
-                  - sagemaker:ListNotebookInstances
-                  - sagemaker:ListCodeRepositories
-                  - sagemaker:ListNotebookInstanceLifecycleConfigs
-                  - sagemaker:DescribeNotebookInstanceLifecycleConfig
+      ManagedPolicyArns:
+        - !Ref WorkshopUserPolicy
+        - !Ref ManagedPolicyArn
+
+  NotebookPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: !Sub Notebook-policy-${Username}
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - s3:*
+              - logs:*
+              - ec2:Describe*
+              - iam:PassRole
+            Resource: '*'
+          - Effect: Allow
+            Resource: !Sub arn:aws:sagemaker:${AWS::Region}:${AWS::AccountId}:notebook-instance/${Username}-notebook
+            Action:
+              - sagemaker:DescribeNotebookInstance
+              - sagemaker:StopNotebookInstance
+          - Effect: Allow
+            Resource: '*'
+            Action:
+              - sagemaker:ListNotebookInstances
 
   WorkshopNotebookRole:
     Type: AWS::IAM::Role
@@ -54,27 +84,7 @@ Resources:
       Path: /
       ManagedPolicyArns:
         - !Ref ManagedPolicyArn
-      Policies:
-        - PolicyName: SageMakerBasic
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - s3:*
-                  - logs:*
-                  - ec2:Describe*
-                  - iam:PassRole
-                Resource: '*'
-              - Effect: Allow
-                Resource: !Sub arn:aws:sagemaker:${AWS::Region}:${AWS::AccountId}:notebook-instance/${Username}-notebook
-                Action:
-                  - sagemaker:DescribeNotebookInstance
-                  - sagemaker:StartNotebookInstance
-              - Effect: Allow
-                Resource: '*'
-                Action:
-                  - sagemaker:ListNotebookInstances
+        - !Ref NotebookPolicy
 
   WorkshopNotebook:
     Type: AWS::SageMaker::NotebookInstance
@@ -83,3 +93,4 @@ Resources:
       InstanceType: ml.t3.medium
       RoleArn: !GetAtt WorkshopNotebookRole.Arn
       LifecycleConfigName: !Ref NotebookLifecycleConfig
+      DefaultCodeRepository: https://github.com/xebia/aws-prompt-engineering-workshop

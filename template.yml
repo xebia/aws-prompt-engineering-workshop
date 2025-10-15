@@ -2,6 +2,13 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Parent SAM template deploying environment.yml as a nested stack
 
+Parameters:
+
+  IdleTime:
+    Type: Number
+    Default: 600
+    Description: Idle time in seconds before the notebooks will auto-stop
+
 Resources:
 
   WorkshopNotebookControlPolicy:
@@ -18,31 +25,26 @@ Resources:
             Action:
               - bedrock:InvokeModel
 
-
   NotebookLifecycleConfig:
     Type: AWS::SageMaker::NotebookInstanceLifecycleConfig
     Properties:
       NotebookInstanceLifecycleConfigName: WorkshopConfig
       OnStart:
-        - Content: !Base64 |
-            #!/bin/bash
-  
-            set -ex
-            
-            IDLE_TIME=600
-
-            # Clone repo
-            cd /home/ec2-user/SageMaker
-            rm -rf aws-prompt-engineering-workshop/
-            git clone https://github.com/xebia/aws-prompt-engineering-workshop
-            
-            PYTHON_DIR=$(source /home/ec2-user/anaconda3/bin/activate /home/ec2-user/anaconda3/envs/JupyterSystemEnv && which python)
-
-            # Auto Stop
-            echo "Fetching the autostop script"
-            wget https://raw.githubusercontent.com/aws-samples/amazon-sagemaker-notebook-instance-lifecycle-config-samples/master/scripts/auto-stop-idle/autostop.py            
-            (crontab -l 2>/dev/null; echo "*/5 * * * * $PYTHON_DIR $PWD/autostop.py --time $IDLE_TIME --ignore-connections >> /var/log/jupyter.log") | crontab -
-            crontab -l
+        - Content:
+            Fn::Base64:
+              Fn::Sub: |
+                #!/bin/bash
+                set -ex
+                # Auto Stop
+                IDLE_TIME=${IdleTime}
+                echo "Fetching the autostop script"
+                cd /home/ec2-user
+                rm autostop.py | true
+                wget -O autostop.py https://raw.githubusercontent.com/aws-samples/amazon-sagemaker-notebook-instance-lifecycle-config-samples/master/scripts/auto-stop-idle/autostop.py
+                chown ec2-user:ec2-user autostop.py
+                PYTHON_DIR=$(source /home/ec2-user/anaconda3/bin/activate /home/ec2-user/anaconda3/envs/JupyterSystemEnv && which python)
+                (crontab -l 2>/dev/null; echo "*/5 * * * * $PYTHON_DIR $PWD/autostop.py --time $IDLE_TIME --ignore-connections >> /var/log/jupyter.log") | crontab -
+                crontab -l
 
   Environment1:
     Type: AWS::Serverless::Application
@@ -60,4 +62,13 @@ Resources:
       Parameters:
         NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
         Username: workshop2
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment3:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop3
         ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
