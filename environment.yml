@@ -118,18 +118,27 @@ Resources:
           TemplateConfiguration:
             Text:
               Text: Hello {{customer_name}}, welcome to our support. How can I help you with {{issue_type}} today?
+              CachePoint:
+                Type: default
               InputVariables:
                 - Name: customer_name
                 - Name: issue_type
           ModelId: eu.amazon.nova-lite-v1:0
           InferenceConfiguration:
             Text:
-              MaxTokens: 200
+              MaxTokens: 1024
               Temperature: 0.7
+              TopP: 0.9
+#              StopSequences: []
+
+  BedrockPromptVersion:
+    Type: AWS::Bedrock::PromptVersion
+    Properties:
+      PromptArn: !GetAtt BedrockPrompt.Arn
 
   ManagedPromptSSMParameter:
     Type: AWS::SSM::Parameter
     Properties:
       Name: !Sub /${Username}/managed-prompt
       Type: String
-      Value: !GetAtt BedrockPrompt.Arn
+      Value: !GetAtt BedrockPromptVersion.Arn

@@ -34,3 +34,9 @@ deploy: ## Build and deploy the application
 		--template-file .aws-sam/build/template.yaml \
 		--resolve-s3 \
 		--capabilities CAPABILITY_NAMED_IAM
+
+credentials:
+	uv run ./utils/create_credentials.py --stack-name aws-prompt-engineering-workshop
+
+delete-credentials:
+	uv run ./utils/create_credentials.py --stack-name aws-prompt-engineering-workshop --delete
