@@ -35,7 +35,7 @@ def get_usernames(cloudformation, stack_name):
                 print(
                     f"  Could not retrieve parameters for stack {nested_stack_id}: {e}"
                 )
-    return usernames
+    return sorted(usernames)
 
 
 def create_console_credentials(iam, username):
