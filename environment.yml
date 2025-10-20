@@ -47,6 +47,7 @@ Resources:
         - !Ref WorkshopNotebookPolicy
         - !Ref ManagedPolicyArn
         - !Ref WorkshopGuardrailPolicy
+        - !Ref WorkshopPromptManagementPolicy
 
   NotebookPolicy:
     Type: AWS::IAM::ManagedPolicy
@@ -124,12 +125,30 @@ Resources:
           TemplateType: TEXT
           TemplateConfiguration:
             Text:
-              Text: Hello {{customer_name}}, welcome to our support. How can I help you with {{issue_type}} today?
+              Text: |
+                You are a customer support assistant specialized in summarizing chat transcripts between customers and agents.
+                Your goal is to provide a concise, structured summary that captures:
+                  - The customer’s main issue
+                  - The troubleshooting steps taken
+                  - The final resolution (or next steps)
+
+                Use the following style:
+                  - Tone: Neutral and professional
+                  - Format: Markdown bullet points
+                  - Length: ≤ 150 words
+
+                ---
+
+                🧾 **Customer Chat Transcript:**
+                {{chat_transcript}}
+
+                📚 **Reference Knowledge Base:**
+                {{knowledge_base}}
               CachePoint:
                 Type: default
               InputVariables:
-                - Name: customer_name
-                - Name: issue_type
+                - Name: chat_transcript
+                - Name: knowledge_base
           ModelId: eu.amazon.nova-lite-v1:0
           InferenceConfiguration:
             Text:
@@ -276,15 +295,30 @@ Resources:
               - '*'
           - Effect: Allow
             Action:
-              - bedrock:ListAgents
               - sagemaker:ListHubContents
-              - bedrock:ListPromptRouters
-              - bedrock:ListInferenceProfiles
-              - bedrock:ListAutomatedReasoningPolicies
             Resource:
-              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:agent/*
               - !Sub arn:aws:sagemaker:${AWS::Region}:aws:hub/SageMakerPublicHub
-              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:prompt-router/*
-              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:application-inference-profile/*
-              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:inference-profile/*
-              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:automated-reasoning-policy/*
+          - Effect: Allow
+            Action:
+              - bedrock:List*
+            Resource: '*'
+
+  WorkshopPromptManagementPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: !Sub ${Username}-prompt-management-policy
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Resource: '*'
+            Action:
+              - bedrock:ListPrompts
+          - Effect: Allow
+            Resource:
+              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:prompt/*
+            Action:
+              - bedrock:GetPrompt
+              - bedrock:OptimizePrompt
+              - bedrock:RenderPrompt
+              - bedrock:UpdatePrompt

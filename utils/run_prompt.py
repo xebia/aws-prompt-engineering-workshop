@@ -15,6 +15,6 @@ def run_prompt(user_message: str) -> str:
     response = client.converse(
         modelId=f"eu.{model_id}",
         messages=conversation,
-        inferenceConfig={"maxTokens": 512, "temperature": 0.5, "topP": 0.9},
+        inferenceConfig={"maxTokens": 512, "temperature": 0.1, "topP": 0.1},
     )
     return response["output"]["message"]["content"][0]["text"]
