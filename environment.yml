@@ -79,6 +79,12 @@ Resources:
               - ssm:GetParameterHistory
               - ssm:GetParametersByPath
             Resource: !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Username}/*
+          - Effect: Allow
+            Action:
+              - bedrock:ApplyGuardrail
+            Resource:
+              - !GetAtt BedrockGuardrail.GuardrailArn
+              - !Sub arn:aws:bedrock:*:${AWS::AccountId}:guardrail-profile/eu.guardrail.v1:0
 
   WorkshopNotebookRole:
     Type: AWS::IAM::Role
@@ -255,7 +261,30 @@ Resources:
               - bedrock:CreateGuardrailVersion
               - bedrock:UpdateGuardrail
               - bedrock:GetGuardrail
-              - bedrock:ListGuardrails
+              - bedrock:ListTagsForResource
             Resource:
               - !GetAtt BedrockGuardrail.GuardrailArn
               - !Sub "${BedrockGuardrail.GuardrailArn}/*"
+              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:guardrail-profile/eu.guardrail.v1:0
+          - Effect: Allow
+            Action:
+              - bedrock:ListMarketplaceModelEndpoints
+              - bedrock:ListGuardrails
+              - bedrock:ListFoundationModels
+              - bedrock:GetUseCaseForModelAccess
+            Resource:
+              - '*'
+          - Effect: Allow
+            Action:
+              - bedrock:ListAgents
+              - sagemaker:ListHubContents
+              - bedrock:ListPromptRouters
+              - bedrock:ListInferenceProfiles
+              - bedrock:ListAutomatedReasoningPolicies
+            Resource:
+              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:agent/*
+              - !Sub arn:aws:sagemaker:${AWS::Region}:aws:hub/SageMakerPublicHub
+              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:prompt-router/*
+              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:application-inference-profile/*
+              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:inference-profile/*
+              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:automated-reasoning-policy/*
