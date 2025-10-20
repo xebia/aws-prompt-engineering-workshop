@@ -63,267 +63,267 @@ Resources:
         NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
         Username: workshop01
         ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment02:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop02
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment03:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop03
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment04:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop04
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment05:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop05
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment06:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop06
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment07:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop07
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment08:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop08
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment09:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop09
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment10:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop10
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment11:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop11
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment12:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop12
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment13:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop13
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment14:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop14
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment15:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop15
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment16:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop16
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment17:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop17
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment18:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop18
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment19:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop19
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment20:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop20
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment21:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop21
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment22:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop22
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment23:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop23
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment24:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop24
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment25:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop25
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment26:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop26
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment27:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop27
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment28:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop28
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment29:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop29
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
-#
-#  Environment30:
-#    Type: AWS::Serverless::Application
-#    Properties:
-#      Location: environment.yml
-#      Parameters:
-#        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
-#        Username: workshop30
-#        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment02:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop02
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment03:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop03
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment04:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop04
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment05:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop05
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment06:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop06
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment07:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop07
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment08:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop08
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment09:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop09
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment10:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop10
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment11:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop11
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment12:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop12
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment13:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop13
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment14:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop14
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment15:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop15
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment16:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop16
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment17:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop17
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment18:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop18
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment19:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop19
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment20:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop20
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment21:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop21
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment22:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop22
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment23:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop23
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment24:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop24
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment25:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop25
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment26:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop26
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment27:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop27
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment28:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop28
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment29:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop29
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
+
+  Environment30:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: environment.yml
+      Parameters:
+        NotebookLifecycleConfig: !GetAtt NotebookLifecycleConfig.NotebookInstanceLifecycleConfigName
+        Username: workshop30
+        ManagedPolicyArn: !Ref WorkshopNotebookControlPolicy
 
 #  Environment31:
 #    Type: AWS::Serverless::Application
