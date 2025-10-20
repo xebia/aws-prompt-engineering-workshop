@@ -86,6 +86,12 @@ Resources:
             Resource:
               - !GetAtt BedrockGuardrail.GuardrailArn
               - !Sub arn:aws:bedrock:*:${AWS::AccountId}:guardrail-profile/eu.guardrail.v1:0
+          - Effect: Allow
+            Action:
+              - bedrock:RenderPrompt
+            Resource:
+              - !Sub arn:aws:bedrock:*:${AWS::AccountId}:prompt/*
+              - !Sub arn:aws:bedrock:*:${AWS::AccountId}:prompt/*:*
 
   WorkshopNotebookRole:
     Type: AWS::IAM::Role
@@ -149,7 +155,7 @@ Resources:
               InputVariables:
                 - Name: chat_transcript
                 - Name: knowledge_base
-          ModelId: eu.amazon.nova-lite-v1:0
+          ModelId: !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:inference-profile/eu.amazon.nova-lite-v1:0
           InferenceConfiguration:
             Text:
               MaxTokens: 1024
@@ -283,7 +289,7 @@ Resources:
               - bedrock:ListTagsForResource
             Resource:
               - !GetAtt BedrockGuardrail.GuardrailArn
-              - !Sub "${BedrockGuardrail.GuardrailArn}/*"
+              - !Sub ${BedrockGuardrail.GuardrailArn}/*
               - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:guardrail-profile/eu.guardrail.v1:0
           - Effect: Allow
             Action:
@@ -314,11 +320,16 @@ Resources:
             Resource: '*'
             Action:
               - bedrock:ListPrompts
+              - bedrock:OptimizePrompt
           - Effect: Allow
             Resource:
               - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:prompt/*
             Action:
               - bedrock:GetPrompt
-              - bedrock:OptimizePrompt
               - bedrock:RenderPrompt
               - bedrock:UpdatePrompt
+          - Effect: Allow
+            Resource:
+              - !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:inference-profile/eu.amazon.nova-lite-v1:0
+            Action:
+              - bedrock:GetInferenceProfile
